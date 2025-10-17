@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Started - ShopHub Documentation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f8f9fa;
+    }
+
+    .navbar {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .sidebar a {
+      color: #495057;
+      text-decoration: none;
+      display: block;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: #007bff;
+      color: white;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 1rem;
+    }
+
+    .alert-custom {
+      border-left: 4px solid;
+      border-radius: 4px;
+    }
+
+    pre[class*="language-"] {
+      border-radius: 8px;
+      margin: 1rem 0;
+    }
+
+    .badge-custom {
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/docs/index.html">
+        <i class="bi bi-book"></i> ShopHub Docs
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/docs/getting-started.html">Getting Started</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/admin-guide.html">Admin Guide</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/api-docs.html">API Docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/payment-setup.html">Payment Setup</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 mb-5">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3">
+        <div class="sidebar">
+          <h6 class="text-muted mb-3">ON THIS PAGE</h6>
+          <a href="#prerequisites">Prerequisites</a>
+          <a href="#installation">Installation</a>
+          <a href="#configuration">Configuration</a>
+          <a href="#database">Database Setup</a>
+          <a href="#admin-user">Create Admin User</a>
+          <a href="#running">Running the App</a>
+          <a href="#testing">Testing</a>
+          <a href="#deployment">Deployment</a>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-lg-9">
+        <h1 class="mb-4"><i class="bi bi-rocket-takeoff"></i> Getting Started</h1>
+        <p class="lead">Follow this guide to set up and run ShopHub on your local machine or server.</p>
+
+        <!-- Prerequisites -->
+        <div id="prerequisites" class="content-section">
+          <h2><span class="step-number">1</span>Prerequisites</h2>
+          <p>Before you begin, ensure you have the following installed:</p>
+          
+          <div class="row g-3 mt-3">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5><i class="bi bi-hdd-network text-success"></i> Node.js</h5>
+                  <p class="mb-2">Version 14.x or higher</p>
+                  <a href="https://nodejs.org" target="_blank" class="btn btn-sm btn-outline-success">Download</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5><i class="bi bi-database text-primary"></i> MongoDB</h5>
+                  <p class="mb-2">Version 4.x or higher</p>
+                  <a href="https://www.mongodb.com/try/download/community" target="_blank" class="btn btn-sm btn-outline-primary">Download</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info alert-custom mt-3">
+            <i class="bi bi-info-circle"></i> <strong>Tip:</strong> You can also use MongoDB Atlas (cloud database) instead of local MongoDB.
+          </div>
+        </div>
+
+        <!-- Installation -->
+        <div id="installation" class="content-section">
+          <h2><span class="step-number">2</span>Installation</h2>
+          
+          <h5 class="mt-4">Clone the Repository</h5>
+          <pre><code class="language-bash">git clone https://github.com/yourusername/shophub.git
+cd shophub</code></pre>
+
+          <h5 class="mt-4">Install Dependencies</h5>
+          <pre><code class="language-bash">npm install</code></pre>
+
+          <div class="alert alert-warning alert-custom">
+            <i class="bi bi-exclamation-triangle"></i> <strong>Note:</strong> This may take a few minutes depending on your internet connection.
+          </div>
+        </div>
+
+        <!-- Configuration -->
+        <div id="configuration" class="content-section">
+          <h2><span class="step-number">3</span>Configuration</h2>
+          
+          <h5 class="mt-4">Create Environment File</h5>
+          <pre><code class="language-bash">cp .env.example .env</code></pre>
+
+          <h5 class="mt-4">Edit .env File</h5>
+          <p>Open the <code>.env</code> file and configure the following variables:</p>
+
+          <pre><code class="language-bash"># Server Configuration
+PORT=3000
+NODE_ENV=development
+
+# Database
+MONGODB_URI=mongodb://localhost:27017/ecommerce
+
+# JWT Secret (Change this!)
+JWT_SECRET=your_super_secret_jwt_key_change_this_in_production
+
+# M-Pesa Daraja API (Optional)
+MPESA_ENVIRONMENT=sandbox
+MPESA_CONSUMER_KEY=your_consumer_key
+MPESA_CONSUMER_SECRET=your_consumer_secret
+MPESA_SHORTCODE=174379
+MPESA_PASSKEY=your_passkey
+MPESA_CALLBACK_URL=https://yourdomain.com/api/payment/mpesa/callback
+
+# PayHero API (Optional)
+PAYHERO_API_KEY=your_base64_encoded_api_key
+PAYHERO_CHANNEL_ID=911
+PAYHERO_CALLBACK_URL=https://yourdomain.com/api/payhero/callback</code></pre>
+
+          <div class="alert alert-danger alert-custom">
+            <i class="bi bi-shield-exclamation"></i> <strong>Security:</strong> Never commit your <code>.env</code> file to version control!
+          </div>
+        </div>
+
+        <!-- Database Setup -->
+        <div id="database" class="content-section">
+          <h2><span class="step-number">4</span>Database Setup</h2>
+          
+          <h5 class="mt-4">Start MongoDB</h5>
+          <p>Make sure MongoDB is running on your system:</p>
+          <pre><code class="language-bash"># On Linux/Mac
+sudo systemctl start mongod
+
+# Or using MongoDB service
+mongod</code></pre>
+
+          <h5 class="mt-4">Seed Sample Data (Optional)</h5>
+          <p>Populate your database with sample products:</p>
+          <pre><code class="language-bash">npm run seed</code></pre>
+
+          <div class="alert alert-success alert-custom">
+            <i class="bi bi-check-circle"></i> <strong>Success:</strong> Sample products have been added to your database!
+          </div>
+        </div>
+
+        <!-- Create Admin User -->
+        <div id="admin-user" class="content-section">
+          <h2><span class="step-number">5</span>Create Admin User</h2>
+          
+          <p>Create an administrator account to access the admin panel:</p>
+          <pre><code class="language-bash">npm run create-admin</code></pre>
+
+          <div class="card bg-light mt-3">
+            <div class="card-body">
+              <h6>Default Admin Credentials:</h6>
+              <ul class="mb-0">
+                <li><strong>Email:</strong> admin@shophub.com</li>
+                <li><strong>Password:</strong> admin123</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="alert alert-warning alert-custom mt-3">
+            <i class="bi bi-exclamation-triangle"></i> <strong>Important:</strong> Change the admin password immediately after first login!
+          </div>
+        </div>
+
+        <!-- Running the App -->
+        <div id="running" class="content-section">
+          <h2><span class="step-number">6</span>Running the Application</h2>
+          
+          <h5 class="mt-4">Development Mode</h5>
+          <p>Start the server with auto-reload on file changes:</p>
+          <pre><code class="language-bash">npm run dev</code></pre>
+
+          <h5 class="mt-4">Production Mode</h5>
+          <p>Start the server in production mode:</p>
+          <pre><code class="language-bash">npm start</code></pre>
+
+          <div class="alert alert-success alert-custom">
+            <i class="bi bi-check-circle"></i> Server is running at <a href="http://localhost:3000" target="_blank">http://localhost:3000</a>
+          </div>
+
+          <h5 class="mt-4">Access Points</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-dark">
+                <tr>
+                  <th>Page</th>
+                  <th>URL</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><i class="bi bi-house"></i> Home</td>
+                  <td><code>http://localhost:3000/</code></td>
+                  <td>Main landing page</td>
+                </tr>
+                <tr>
+                  <td><i class="bi bi-box-seam"></i> Products</td>
+                  <td><code>http://localhost:3000/products.html</code></td>
+                  <td>Product catalog</td>
+                </tr>
+                <tr>
+                  <td><i class="bi bi-shield-lock"></i> Admin Panel</td>
+                  <td><code>http://localhost:3000/admin.html</code></td>
+                  <td>Admin dashboard</td>
+                </tr>
+                <tr>
+                  <td><i class="bi bi-person-circle"></i> User Dashboard</td>
+                  <td><code>http://localhost:3000/dashboard.html</code></td>
+                  <td>User account & orders</td>
+                </tr>
+                <tr>
+                  <td><i class="bi bi-book"></i> Documentation</td>
+                  <td><code>http://localhost:3000/docs/</code></td>
+                  <td>This documentation</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Testing -->
+        <div id="testing" class="content-section">
+          <h2><span class="step-number">7</span>Testing</h2>
+          
+          <h5 class="mt-4">Test User Registration</h5>
+          <ol>
+            <li>Navigate to <code>http://localhost:3000/register.html</code></li>
+            <li>Create a new user account</li>
+            <li>Login with your credentials</li>
+          </ol>
+
+          <h5 class="mt-4">Test Product Browsing</h5>
+          <ol>
+            <li>Go to Products page</li>
+            <li>Browse available products</li>
+            <li>Add items to cart</li>
+          </ol>
+
+          <h5 class="mt-4">Test Admin Panel</h5>
+          <ol>
+            <li>Login with admin credentials</li>
+            <li>Navigate to <code>http://localhost:3000/admin.html</code></li>
+            <li>Try adding/editing products</li>
+          </ol>
+        </div>
+
+        <!-- Deployment -->
+        <div id="deployment" class="content-section">
+          <h2><span class="step-number">8</span>Deployment</h2>
+          
+          <h5 class="mt-4">Prepare for Production</h5>
+          <div class="card mb-3">
+            <div class="card-body">
+              <h6>Checklist:</h6>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check1">
+                <label class="form-check-label" for="check1">
+                  Update <code>NODE_ENV</code> to <code>production</code>
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check2">
+                <label class="form-check-label" for="check2">
+                  Change JWT_SECRET to a strong random string
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check3">
+                <label class="form-check-label" for="check3">
+                  Configure production MongoDB URI
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check4">
+                <label class="form-check-label" for="check4">
+                  Set up payment gateway credentials
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="check5">
+                <label class="form-check-label" for="check5">
+                  Configure callback URLs with your domain
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="mt-4">Deployment Platforms</h5>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6><i class="bi bi-cloud"></i> Heroku</h6>
+                  <p class="small">Easy deployment with free tier</p>
+                  <a href="https://www.heroku.com" target="_blank" class="btn btn-sm btn-outline-primary">Learn More</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6><i class="bi bi-cloud"></i> Railway</h6>
+                  <p class="small">Modern deployment platform</p>
+                  <a href="https://railway.app" target="_blank" class="btn btn-sm btn-outline-primary">Learn More</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card h-100">
+                <div class="card-body">
+                  <h6><i class="bi bi-cloud"></i> DigitalOcean</h6>
+                  <p class="small">VPS hosting solution</p>
+                  <a href="https://www.digitalocean.com" target="_blank" class="btn btn-sm btn-outline-primary">Learn More</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Next Steps -->
+        <div class="content-section bg-light">
+          <h3><i class="bi bi-arrow-right-circle"></i> Next Steps</h3>
+          <div class="row g-3 mt-2">
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Configure Payments</h5>
+                  <p class="card-text">Set up M-Pesa payment integration</p>
+                  <a href="/docs/payment-setup.html" class="btn btn-primary">Payment Setup →</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">Admin Guide</h5>
+                  <p class="card-text">Learn how to manage your store</p>
+                  <a href="/docs/admin-guide.html" class="btn btn-success">Admin Guide →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script>
+    // Smooth scroll for sidebar links
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          
+          // Update active link
+          document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+
+    // Highlight active section on scroll
+    window.addEventListener('scroll', () => {
+      const sections = document.querySelectorAll('.content-section[id]');
+      let current = '';
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.pageYOffset >= sectionTop - 100) {
+          current = section.getAttribute('id');
+        }
+      });
+
+      document.querySelectorAll('.sidebar a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

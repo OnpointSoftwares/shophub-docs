@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopHub Documentation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-color: #007bff;
+      --secondary-color: #6c757d;
+      --success-color: #28a745;
+      --danger-color: #dc3545;
+      --warning-color: #ffc107;
+      --info-color: #17a2b8;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f8f9fa;
+    }
+
+    .navbar {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 4rem 0;
+      margin-bottom: 3rem;
+    }
+
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero-section p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+    }
+
+    .doc-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      height: 100%;
+    }
+
+    .doc-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+
+    .doc-card .card-header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-weight: 600;
+      border: none;
+    }
+
+    .icon-box {
+      width: 60px;
+      height: 60px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .icon-box.primary {
+      background: rgba(0, 123, 255, 0.1);
+      color: var(--primary-color);
+    }
+
+    .icon-box.success {
+      background: rgba(40, 167, 69, 0.1);
+      color: var(--success-color);
+    }
+
+    .icon-box.warning {
+      background: rgba(255, 193, 7, 0.1);
+      color: var(--warning-color);
+    }
+
+    .icon-box.info {
+      background: rgba(23, 162, 184, 0.1);
+      color: var(--info-color);
+    }
+
+    .quick-links {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .quick-links a {
+      color: #495057;
+      text-decoration: none;
+      padding: 0.5rem 0;
+      display: block;
+      transition: color 0.3s ease;
+    }
+
+    .quick-links a:hover {
+      color: var(--primary-color);
+    }
+
+    .feature-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .feature-list li {
+      padding: 0.5rem 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .feature-list li i {
+      color: var(--success-color);
+      margin-right: 0.5rem;
+    }
+
+    footer {
+      background: #343a40;
+      color: white;
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+
+    .code-block {
+      background: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/docs/index.html">
+        <i class="bi bi-book"></i> ShopHub Docs
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="/docs/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/getting-started.html">Getting Started</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/admin-guide.html">Admin Guide</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/api-docs.html">API Docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/payment-setup.html">Payment Setup</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/">
+              <i class="bi bi-house"></i> Back to Site
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="container text-center">
+      <h1><i class="bi bi-book-half"></i> ShopHub Documentation</h1>
+      <p class="lead">Complete guide to building and managing your e-commerce platform</p>
+      <div class="mt-4">
+        <a href="/docs/getting-started.html" class="btn btn-light btn-lg me-2">
+          <i class="bi bi-rocket"></i> Get Started
+        </a>
+        <a href="/docs/api-docs.html" class="btn btn-outline-light btn-lg">
+          <i class="bi bi-code-square"></i> API Reference
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Documentation Cards -->
+    <div class="row g-4 mb-5">
+      <div class="col-md-6 col-lg-3">
+        <div class="card doc-card">
+          <div class="card-body text-center">
+            <div class="icon-box primary mx-auto">
+              <i class="bi bi-rocket-takeoff"></i>
+            </div>
+            <h5 class="card-title">Getting Started</h5>
+            <p class="card-text">Quick setup guide to get your e-commerce site running</p>
+            <a href="/docs/getting-started.html" class="btn btn-primary btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card doc-card">
+          <div class="card-body text-center">
+            <div class="icon-box success mx-auto">
+              <i class="bi bi-shield-check"></i>
+            </div>
+            <h5 class="card-title">Admin Guide</h5>
+            <p class="card-text">Learn how to manage products, orders, and users</p>
+            <a href="/docs/admin-guide.html" class="btn btn-success btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card doc-card">
+          <div class="card-body text-center">
+            <div class="icon-box warning mx-auto">
+              <i class="bi bi-credit-card"></i>
+            </div>
+            <h5 class="card-title">Payment Setup</h5>
+            <p class="card-text">Configure M-Pesa payments with PayHero and Daraja</p>
+            <a href="/docs/payment-setup.html" class="btn btn-warning btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div class="card doc-card">
+          <div class="card-body text-center">
+            <div class="icon-box info mx-auto">
+              <i class="bi bi-code-slash"></i>
+            </div>
+            <h5 class="card-title">API Reference</h5>
+            <p class="card-text">Complete API documentation for developers</p>
+            <a href="/docs/api-docs.html" class="btn btn-info btn-sm">Read More</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row mb-5">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0"><i class="bi bi-star"></i> Platform Features</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6">
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle-fill"></i> User Authentication & Authorization</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Product Management System</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Shopping Cart Functionality</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Order Processing</li>
+                  <li><i class="bi bi-check-circle-fill"></i> M-Pesa Payment Integration</li>
+                </ul>
+              </div>
+              <div class="col-md-6">
+                <ul class="feature-list">
+                  <li><i class="bi bi-check-circle-fill"></i> Admin Dashboard</li>
+                  <li><i class="bi bi-check-circle-fill"></i> User Dashboard</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Real-time Order Tracking</li>
+                  <li><i class="bi bi-check-circle-fill"></i> Responsive Design</li>
+                  <li><i class="bi bi-check-circle-fill"></i> RESTful API</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-4">
+        <div class="quick-links">
+          <h5 class="mb-3"><i class="bi bi-link-45deg"></i> Quick Links</h5>
+          <a href="/docs/getting-started.html#installation"><i class="bi bi-chevron-right"></i> Installation</a>
+          <a href="/docs/getting-started.html#configuration"><i class="bi bi-chevron-right"></i> Configuration</a>
+          <a href="/docs/admin-guide.html#create-admin"><i class="bi bi-chevron-right"></i> Create Admin User</a>
+          <a href="/docs/payment-setup.html#payhero"><i class="bi bi-chevron-right"></i> PayHero Setup</a>
+          <a href="/docs/payment-setup.html#daraja"><i class="bi bi-chevron-right"></i> Daraja API Setup</a>
+          <a href="/docs/api-docs.html#authentication"><i class="bi bi-chevron-right"></i> API Authentication</a>
+          <a href="/docs/troubleshooting.html"><i class="bi bi-chevron-right"></i> Troubleshooting</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Start -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0"><i class="bi bi-lightning"></i> Quick Start</h4>
+          </div>
+          <div class="card-body">
+            <h5>1. Install Dependencies</h5>
+            <div class="code-block mb-3">
+              npm install
+            </div>
+
+            <h5>2. Configure Environment</h5>
+            <div class="code-block mb-3">
+              cp .env.example .env<br>
+              # Edit .env with your configuration
+            </div>
+
+            <h5>3. Create Admin User</h5>
+            <div class="code-block mb-3">
+              npm run create-admin
+            </div>
+
+            <h5>4. Start Server</h5>
+            <div class="code-block mb-3">
+              npm start
+            </div>
+
+            <div class="alert alert-info mt-3">
+              <i class="bi bi-info-circle"></i> <strong>Note:</strong> Make sure MongoDB is running before starting the server.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack -->
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="mb-0"><i class="bi bi-stack"></i> Technology Stack</h4>
+          </div>
+          <div class="card-body">
+            <div class="row text-center">
+              <div class="col-md-3 mb-3">
+                <h5>Backend</h5>
+                <span class="badge bg-success mb-1">Node.js</span>
+                <span class="badge bg-success mb-1">Express.js</span>
+                <span class="badge bg-success mb-1">MongoDB</span>
+                <span class="badge bg-success mb-1">Mongoose</span>
+              </div>
+              <div class="col-md-3 mb-3">
+                <h5>Frontend</h5>
+                <span class="badge bg-primary mb-1">HTML5</span>
+                <span class="badge bg-primary mb-1">CSS3</span>
+                <span class="badge bg-primary mb-1">JavaScript</span>
+                <span class="badge bg-primary mb-1">Bootstrap</span>
+              </div>
+              <div class="col-md-3 mb-3">
+                <h5>Authentication</h5>
+                <span class="badge bg-warning mb-1">JWT</span>
+                <span class="badge bg-warning mb-1">bcryptjs</span>
+              </div>
+              <div class="col-md-3 mb-3">
+                <h5>Payments</h5>
+                <span class="badge bg-info mb-1">M-Pesa</span>
+                <span class="badge bg-info mb-1">PayHero</span>
+                <span class="badge bg-info mb-1">Daraja API</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <h5><i class="bi bi-shop"></i> ShopHub</h5>
+          <p>Modern e-commerce platform built with Node.js and MongoDB</p>
+        </div>
+        <div class="col-md-3">
+          <h6>Documentation</h6>
+          <ul class="list-unstyled">
+            <li><a href="/docs/getting-started.html" class="text-white-50">Getting Started</a></li>
+            <li><a href="/docs/admin-guide.html" class="text-white-50">Admin Guide</a></li>
+            <li><a href="/docs/api-docs.html" class="text-white-50">API Docs</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <h6>Resources</h6>
+          <ul class="list-unstyled">
+            <li><a href="https://github.com" class="text-white-50">GitHub</a></li>
+            <li><a href="/docs/troubleshooting.html" class="text-white-50">Troubleshooting</a></li>
+            <li><a href="#" class="text-white-50">Support</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr class="bg-white">
+      <div class="text-center">
+        <p class="mb-0">&copy; 2025 ShopHub. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

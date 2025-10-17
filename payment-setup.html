@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payment Setup - ShopHub Documentation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f8f9fa;
+    }
+
+    .navbar {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .sidebar a {
+      color: #495057;
+      text-decoration: none;
+      display: block;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: #ffc107;
+      color: #000;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .provider-card {
+      border: 2px solid #e9ecef;
+      border-radius: 12px;
+      padding: 2rem;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .provider-card:hover {
+      border-color: #ffc107;
+      box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+    }
+
+    .provider-logo {
+      width: 80px;
+      height: 80px;
+      background: #f8f9fa;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .step-indicator {
+      width: 35px;
+      height: 35px;
+      background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+      color: white;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-right: 0.75rem;
+    }
+
+    .comparison-table th {
+      background: #ffc107;
+      color: #000;
+    }
+
+    .code-snippet {
+      background: #2d2d2d;
+      color: #f8f8f2;
+      padding: 1rem;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/docs/index.html">
+        <i class="bi bi-book"></i> ShopHub Docs
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/getting-started.html">Getting Started</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/admin-guide.html">Admin Guide</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/api-docs.html">API Docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/docs/payment-setup.html">Payment Setup</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 mb-5">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3">
+        <div class="sidebar">
+          <h6 class="text-muted mb-3">ON THIS PAGE</h6>
+          <a href="#overview">Overview</a>
+          <a href="#comparison">Comparison</a>
+          <a href="#payhero">PayHero Setup</a>
+          <a href="#daraja">Daraja API Setup</a>
+          <a href="#testing">Testing Payments</a>
+          <a href="#troubleshooting">Troubleshooting</a>
+          <a href="#production">Production</a>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-lg-9">
+        <h1 class="mb-4"><i class="bi bi-credit-card text-warning"></i> Payment Setup Guide</h1>
+        <p class="lead">Configure M-Pesa payment integration using PayHero or Safaricom Daraja API.</p>
+
+        <!-- Overview -->
+        <div id="overview" class="content-section">
+          <h2><i class="bi bi-info-circle"></i> Overview</h2>
+          <p>ShopHub supports two M-Pesa payment gateways:</p>
+
+          <div class="row g-4 mt-3">
+            <div class="col-md-6">
+              <div class="provider-card">
+                <div class="provider-logo bg-primary text-white">
+                  <i class="bi bi-credit-card-2-front"></i>
+                </div>
+                <h4>PayHero</h4>
+                <p class="text-muted">Third-party payment gateway with simplified integration</p>
+                <ul class="small">
+                  <li>Easy setup process</li>
+                  <li>Managed infrastructure</li>
+                  <li>Built-in callback handling</li>
+                  <li>Transaction fees apply</li>
+                </ul>
+                <span class="badge bg-success">Recommended for Beginners</span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="provider-card">
+                <div class="provider-logo bg-success text-white">
+                  <i class="bi bi-phone"></i>
+                </div>
+                <h4>Safaricom Daraja API</h4>
+                <p class="text-muted">Direct integration with Safaricom M-Pesa</p>
+                <ul class="small">
+                  <li>Direct M-Pesa integration</li>
+                  <li>Lower transaction fees</li>
+                  <li>More control over flow</li>
+                  <li>Complex setup process</li>
+                </ul>
+                <span class="badge bg-info">Advanced Users</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comparison -->
+        <div id="comparison" class="content-section">
+          <h2><i class="bi bi-bar-chart"></i> Feature Comparison</h2>
+          
+          <div class="table-responsive">
+            <table class="table table-bordered comparison-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>PayHero</th>
+                  <th>Daraja API</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Setup Difficulty</strong></td>
+                  <td><span class="badge bg-success">Easy</span></td>
+                  <td><span class="badge bg-warning">Moderate</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Account Approval</strong></td>
+                  <td>1-2 business days</td>
+                  <td>3-5 business days</td>
+                </tr>
+                <tr>
+                  <td><strong>Transaction Fees</strong></td>
+                  <td>Higher (includes service fee)</td>
+                  <td>Lower (standard M-Pesa rates)</td>
+                </tr>
+                <tr>
+                  <td><strong>Callback Handling</strong></td>
+                  <td>Managed by PayHero</td>
+                  <td>Self-managed</td>
+                </tr>
+                <tr>
+                  <td><strong>Documentation</strong></td>
+                  <td>Comprehensive</td>
+                  <td>Technical</td>
+                </tr>
+                <tr>
+                  <td><strong>Support</strong></td>
+                  <td>Email & Phone</td>
+                  <td>Developer Portal</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- PayHero Setup -->
+        <div id="payhero" class="content-section">
+          <h2><i class="bi bi-credit-card-2-front"></i> PayHero Setup</h2>
+          
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> <strong>Current Status:</strong> If you see "Merchant Account Inactive" error, your PayHero account needs activation. Use Daraja API in the meantime.
+          </div>
+
+          <h5 class="mt-4"><span class="step-indicator">1</span>Create PayHero Account</h5>
+          <ol>
+            <li>Visit <a href="https://payhero.co.ke" target="_blank">https://payhero.co.ke</a></li>
+            <li>Click "Sign Up" and create an account</li>
+            <li>Complete business verification (KYC)</li>
+            <li>Wait for account approval (1-2 business days)</li>
+          </ol>
+
+          <h5 class="mt-4"><span class="step-indicator">2</span>Get API Credentials</h5>
+          <ol>
+            <li>Login to PayHero dashboard</li>
+            <li>Navigate to <strong>Settings → API Keys</strong></li>
+            <li>Copy your <strong>API Key</strong> (Base64 encoded)</li>
+            <li>Copy your <strong>Channel ID</strong></li>
+          </ol>
+
+          <h5 class="mt-4"><span class="step-indicator">3</span>Configure Environment Variables</h5>
+          <p>Add the following to your <code>.env</code> file:</p>
+          <pre><code class="language-bash"># PayHero Configuration
+PAYHERO_API_KEY=Basic YOUR_BASE64_API_KEY_HERE
+PAYHERO_CHANNEL_ID=your_channel_id
+PAYHERO_CALLBACK_URL=https://yourdomain.com/api/payhero/callback</code></pre>
+
+          <div class="alert alert-warning">
+            <i class="bi bi-exclamation-triangle"></i> <strong>Important:</strong> The API key must include the "Basic " prefix!
+          </div>
+
+          <h5 class="mt-4"><span class="step-indicator">4</span>Test Integration</h5>
+          <ol>
+            <li>Start your server: <code>npm start</code></li>
+            <li>Navigate to checkout page</li>
+            <li>Select "PayHero" as payment provider</li>
+            <li>Enter test phone number</li>
+            <li>Complete test payment</li>
+          </ol>
+
+          <h5 class="mt-4">Contact Information</h5>
+          <div class="card">
+            <div class="card-body">
+              <h6><i class="bi bi-headset"></i> PayHero Support</h6>
+              <ul class="mb-0">
+                <li><strong>Email:</strong> support@payhero.co.ke</li>
+                <li><strong>Website:</strong> <a href="https://payhero.co.ke" target="_blank">payhero.co.ke</a></li>
+                <li><strong>Docs:</strong> <a href="https://docs.payhero.co.ke" target="_blank">docs.payhero.co.ke</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Daraja API Setup -->
+        <div id="daraja" class="content-section">
+          <h2><i class="bi bi-phone"></i> Safaricom Daraja API Setup</h2>
+          
+          <div class="alert alert-success">
+            <i class="bi bi-check-circle"></i> <strong>Recommended:</strong> Use this option while waiting for PayHero account activation.
+          </div>
+
+          <h5 class="mt-4"><span class="step-indicator">1</span>Create Safaricom Developer Account</h5>
+          <ol>
+            <li>Visit <a href="https://developer.safaricom.co.ke" target="_blank">Safaricom Developer Portal</a></li>
+            <li>Click "Sign Up" and create an account</li>
+            <li>Verify your email address</li>
+            <li>Complete your profile</li>
+          </ol>
+
+          <h5 class="mt-4"><span class="step-indicator">2</span>Create an App</h5>
+          <ol>
+            <li>Login to developer portal</li>
+            <li>Click "My Apps" → "Create New App"</li>
+            <li>Select "Lipa Na M-Pesa Online" API</li>
+            <li>Fill in app details and submit</li>
+          </ol>
+
+          <h5 class="mt-4"><span class="step-indicator">3</span>Get Credentials</h5>
+          <p>After app creation, you'll receive:</p>
+          <ul>
+            <li><strong>Consumer Key</strong></li>
+            <li><strong>Consumer Secret</strong></li>
+            <li><strong>Shortcode</strong> (for sandbox: 174379)</li>
+            <li><strong>Passkey</strong></li>
+          </ul>
+
+          <h5 class="mt-4"><span class="step-indicator">4</span>Configure Environment Variables</h5>
+          <pre><code class="language-bash"># M-Pesa Daraja Configuration
+MPESA_ENVIRONMENT=sandbox
+MPESA_CONSUMER_KEY=your_consumer_key_here
+MPESA_CONSUMER_SECRET=your_consumer_secret_here
+MPESA_SHORTCODE=174379
+MPESA_PASSKEY=your_passkey_here
+MPESA_CALLBACK_URL=https://yourdomain.com/api/payment/mpesa/callback</code></pre>
+
+          <h5 class="mt-4"><span class="step-indicator">5</span>Set Up Callback URL</h5>
+          <p>For local testing, use ngrok:</p>
+          <pre><code class="language-bash"># Install ngrok
+npm install -g ngrok
+
+# Start your server
+npm start
+
+# In another terminal, start ngrok
+ngrok http 3000
+
+# Copy the HTTPS URL and update MPESA_CALLBACK_URL</code></pre>
+
+          <h5 class="mt-4"><span class="step-indicator">6</span>Go Live</h5>
+          <div class="alert alert-warning">
+            <h6><i class="bi bi-exclamation-triangle"></i> Production Requirements</h6>
+            <ul class="mb-0">
+              <li>Complete business verification</li>
+              <li>Get production credentials</li>
+              <li>Update <code>MPESA_ENVIRONMENT</code> to <code>production</code></li>
+              <li>Use your actual Till/Paybill number</li>
+            </ul>
+          </div>
+
+          <h5 class="mt-4">Contact Information</h5>
+          <div class="card">
+            <div class="card-body">
+              <h6><i class="bi bi-headset"></i> Safaricom Support</h6>
+              <ul class="mb-0">
+                <li><strong>Email:</strong> apisupport@safaricom.co.ke</li>
+                <li><strong>Phone:</strong> 0711 051 000</li>
+                <li><strong>Portal:</strong> <a href="https://developer.safaricom.co.ke" target="_blank">developer.safaricom.co.ke</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testing -->
+        <div id="testing" class="content-section">
+          <h2><i class="bi bi-check2-square"></i> Testing Payments</h2>
+          
+          <h5 class="mt-4">Test Phone Numbers</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-dark">
+                <tr>
+                  <th>Phone Number</th>
+                  <th>Format</th>
+                  <th>Expected Result</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>0712345678</td>
+                  <td>Safaricom format</td>
+                  <td>Success (sandbox)</td>
+                </tr>
+                <tr>
+                  <td>254712345678</td>
+                  <td>International format</td>
+                  <td>Success (sandbox)</td>
+                </tr>
+                <tr>
+                  <td>0722000000</td>
+                  <td>Airtel (non-Safaricom)</td>
+                  <td>Error - Invalid network</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h5 class="mt-4">Testing Checklist</h5>
+          <div class="card">
+            <div class="card-body">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="test1">
+                <label class="form-check-label" for="test1">
+                  Payment initiation works
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="test2">
+                <label class="form-check-label" for="test2">
+                  STK Push received on phone
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="test3">
+                <label class="form-check-label" for="test3">
+                  Successful payment updates order
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="test4">
+                <label class="form-check-label" for="test4">
+                  Failed payment handled correctly
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="test5">
+                <label class="form-check-label" for="test5">
+                  Callback received and processed
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Troubleshooting -->
+        <div id="troubleshooting" class="content-section">
+          <h2><i class="bi bi-tools"></i> Troubleshooting</h2>
+          
+          <div class="accordion" id="paymentTroubleshooting">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#error1">
+                  PayHero: Merchant Account Inactive
+                </button>
+              </h2>
+              <div id="error1" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                  <strong>Solution:</strong>
+                  <ul>
+                    <li>Contact PayHero support for account activation</li>
+                    <li>Complete all KYC requirements</li>
+                    <li>Use Daraja API as alternative</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#error2">
+                  STK Push Not Received
+                </button>
+              </h2>
+              <div id="error2" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <strong>Solutions:</strong>
+                  <ul>
+                    <li>Verify phone number format (0712345678 or 254712345678)</li>
+                    <li>Ensure phone number is Safaricom</li>
+                    <li>Check phone has network coverage</li>
+                    <li>Verify API credentials are correct</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#error3">
+                  Callback Not Received
+                </button>
+              </h2>
+              <div id="error3" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <strong>Solutions:</strong>
+                  <ul>
+                    <li>Ensure callback URL is publicly accessible</li>
+                    <li>Use ngrok for local testing</li>
+                    <li>Check server logs for incoming requests</li>
+                    <li>Verify firewall allows incoming connections</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#error4">
+                  Invalid Credentials Error
+                </button>
+              </h2>
+              <div id="error4" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <strong>Solutions:</strong>
+                  <ul>
+                    <li>Verify API keys in .env file</li>
+                    <li>Check for extra spaces or line breaks</li>
+                    <li>Ensure "Basic " prefix for PayHero API key</li>
+                    <li>Regenerate credentials if necessary</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Production -->
+        <div id="production" class="content-section">
+          <h2><i class="bi bi-rocket-takeoff"></i> Production Deployment</h2>
+          
+          <h5 class="mt-4">Pre-Deployment Checklist</h5>
+          <div class="card">
+            <div class="card-body">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="prod1">
+                <label class="form-check-label" for="prod1">
+                  Payment gateway account approved
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="prod2">
+                <label class="form-check-label" for="prod2">
+                  Production credentials obtained
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="prod3">
+                <label class="form-check-label" for="prod3">
+                  Callback URL configured with production domain
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="prod4">
+                <label class="form-check-label" for="prod4">
+                  SSL certificate installed (HTTPS)
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="prod5">
+                <label class="form-check-label" for="prod5">
+                  Payment flow tested end-to-end
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="prod6">
+                <label class="form-check-label" for="prod6">
+                  Error handling implemented
+                </label>
+              </div>
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="prod7">
+                <label class="form-check-label" for="prod7">
+                  Logging configured for monitoring
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="mt-4">Security Best Practices</h5>
+          <div class="alert alert-danger">
+            <h6><i class="bi bi-shield-exclamation"></i> Critical Security Measures</h6>
+            <ul class="mb-0">
+              <li>Never commit .env file to version control</li>
+              <li>Use environment variables for all credentials</li>
+              <li>Always use HTTPS in production</li>
+              <li>Validate all callback data</li>
+              <li>Implement rate limiting on payment endpoints</li>
+              <li>Monitor transactions for anomalies</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Quick Reference -->
+        <div class="content-section bg-light">
+          <h3><i class="bi bi-bookmark"></i> Quick Reference</h3>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <h6>PayHero Endpoints</h6>
+              <ul class="small">
+                <li><code>POST /api/payhero/initiate</code> - Initiate payment</li>
+                <li><code>GET /api/payhero/status/:orderId</code> - Check status</li>
+                <li><code>POST /api/payhero/callback</code> - Webhook</li>
+              </ul>
+            </div>
+            <div class="col-md-6">
+              <h6>Daraja Endpoints</h6>
+              <ul class="small">
+                <li><code>POST /api/payment/mpesa/initiate</code> - Initiate payment</li>
+                <li><code>GET /api/payment/mpesa/status/:orderId</code> - Check status</li>
+                <li><code>POST /api/payment/mpesa/callback</code> - Webhook</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+  <script>
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

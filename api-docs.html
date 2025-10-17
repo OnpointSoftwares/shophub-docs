@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Documentation - ShopHub</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f8f9fa;
+    }
+
+    .navbar {
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 80px;
+      height: calc(100vh - 100px);
+      overflow-y: auto;
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .sidebar a {
+      color: #495057;
+      text-decoration: none;
+      display: block;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+    }
+
+    .sidebar a:hover, .sidebar a.active {
+      background: #17a2b8;
+      color: white;
+    }
+
+    .content-section {
+      background: white;
+      border-radius: 8px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .problem-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .problem-card h3 {
+      color: white;
+    }
+
+    .uniqueness-card {
+      border: 2px solid #17a2b8;
+      border-radius: 12px;
+      padding: 1.5rem;
+      height: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .uniqueness-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(23, 162, 184, 0.2);
+    }
+
+    .icon-large {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .endpoint-card {
+      background: #f8f9fa;
+      border-left: 4px solid #17a2b8;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 4px;
+    }
+
+    .method-badge {
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+
+    .method-get { background: #28a745; color: white; }
+    .method-post { background: #007bff; color: white; }
+    .method-put { background: #ffc107; color: #000; }
+    .method-delete { background: #dc3545; color: white; }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="/docs/index.html">
+        <i class="bi bi-book"></i> ShopHub Docs
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/getting-started.html">Getting Started</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/admin-guide.html">Admin Guide</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/docs/api-docs.html">API Docs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/docs/payment-setup.html">Payment Setup</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container mt-4 mb-5">
+    <div class="row">
+      <!-- Sidebar -->
+      <div class="col-lg-3">
+        <div class="sidebar">
+          <h6 class="text-muted mb-3">ON THIS PAGE</h6>
+          <a href="#problem">Problem Statement</a>
+          <a href="#uniqueness">What Makes Us Unique</a>
+          <a href="#overview">API Overview</a>
+          <a href="#authentication">Authentication</a>
+          <a href="#products">Products API</a>
+          <a href="#cart">Cart API</a>
+          <a href="#orders">Orders API</a>
+          <a href="#payments">Payments API</a>
+          <a href="#admin">Admin API</a>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="col-lg-9">
+        <h1 class="mb-4"><i class="bi bi-code-slash text-info"></i> ShopHub Platform</h1>
+        <p class="lead">Understanding the problem we solve and what makes ShopHub unique in the e-commerce landscape.</p>
+
+        <!-- Problem Statement -->
+        <div id="problem" class="problem-card">
+          <h2><i class="bi bi-exclamation-triangle"></i> Problem Statement</h2>
+          <p class="lead">E-commerce in Kenya and East Africa faces significant challenges that prevent businesses from thriving online.</p>
+          
+          <div class="row g-3 mt-3">
+            <div class="col-md-6">
+              <div class="card bg-white bg-opacity-10 border-0">
+                <div class="card-body">
+                  <h5><i class="bi bi-credit-card-2-front"></i> Payment Integration Complexity</h5>
+                  <p class="small mb-0">Setting up M-Pesa payments is technically challenging, requiring deep understanding of Safaricom's Daraja API, callback handling, and security protocols. Many small businesses lack the technical expertise.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card bg-white bg-opacity-10 border-0">
+                <div class="card-body">
+                  <h5><i class="bi bi-currency-dollar"></i> High Development Costs</h5>
+                  <p class="small mb-0">Building a custom e-commerce platform from scratch costs thousands of dollars and takes months. Off-the-shelf solutions often don't support local payment methods like M-Pesa.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card bg-white bg-opacity-10 border-0">
+                <div class="card-body">
+                  <h5><i class="bi bi-globe"></i> Limited Local Solutions</h5>
+                  <p class="small mb-0">International platforms like Shopify charge in USD and don't natively support M-Pesa. Local alternatives are either too expensive or lack essential features.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card bg-white bg-opacity-10 border-0">
+                <div class="card-body">
+                  <h5><i class="bi bi-tools"></i> Technical Barriers</h5>
+                  <p class="small mb-0">Managing products, inventory, orders, and customer data requires technical knowledge. Most small business owners need simple, intuitive tools.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-light mt-4">
+            <h6><i class="bi bi-graph-down"></i> The Impact</h6>
+            <p class="mb-0 text-dark">These challenges prevent thousands of Kenyan businesses from selling online, limiting their growth potential and excluding them from the digital economy. Many resort to manual processes via WhatsApp and social media, losing sales and efficiency.</p>
+          </div>
+        </div>
+
+        <!-- Uniqueness -->
+        <div id="uniqueness" class="content-section">
+          <h2><i class="bi bi-star"></i> What Makes ShopHub Unique</h2>
+          <p>ShopHub addresses these challenges with a comprehensive, locally-optimized solution:</p>
+
+          <div class="row g-4 mt-3">
+            <div class="col-md-6">
+              <div class="uniqueness-card">
+                <div class="icon-large text-success">
+                  <i class="bi bi-phone-vibrate"></i>
+                </div>
+                <h4>Dual M-Pesa Integration</h4>
+                <p>First platform to offer both PayHero and Daraja API integration out-of-the-box. Users can choose based on their needs:</p>
+                <ul class="small">
+                  <li><strong>PayHero:</strong> Easy setup, managed infrastructure</li>
+                  <li><strong>Daraja:</strong> Lower fees, direct integration</li>
+                </ul>
+                <span class="badge bg-success">Unique Feature</span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="uniqueness-card">
+                <div class="icon-large text-primary">
+                  <i class="bi bi-currency-exchange"></i>
+                </div>
+                <h4>Kenya-First Design</h4>
+                <p>Built specifically for the Kenyan market:</p>
+                <ul class="small">
+                  <li>Pricing in KES (Kenyan Shillings)</li>
+                  <li>M-Pesa as primary payment method</li>
+                  <li>Local phone number formats</li>
+                  <li>Optimized for Kenyan internet speeds</li>
+                </ul>
+                <span class="badge bg-primary">Localized</span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="uniqueness-card">
+                <div class="icon-large text-warning">
+                  <i class="bi bi-code-square"></i>
+                </div>
+                <h4>Open Source & Free</h4>
+                <p>Unlike expensive alternatives:</p>
+                <ul class="small">
+                  <li>100% free to use and modify</li>
+                  <li>No monthly subscription fees</li>
+                  <li>Full source code access</li>
+                  <li>Self-hosted - you own your data</li>
+                </ul>
+                <span class="badge bg-warning text-dark">Cost-Effective</span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="uniqueness-card">
+                <div class="icon-large text-info">
+                  <i class="bi bi-lightning-charge"></i>
+                </div>
+                <h4>Quick Setup</h4>
+                <p>Get started in minutes, not months:</p>
+                <ul class="small">
+                  <li>One-command installation</li>
+                  <li>Pre-configured payment gateways</li>
+                  <li>Sample products included</li>
+                  <li>Admin panel ready to use</li>
+                </ul>
+                <span class="badge bg-info">Fast Deployment</span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="uniqueness-card">
+                <div class="icon-large text-danger">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <h4>Enterprise-Grade Security</h4>
+                <p>Bank-level security features:</p>
+                <ul class="small">
+                  <li>JWT authentication</li>
+                  <li>Password encryption (bcrypt)</li>
+                  <li>Role-based access control</li>
+                  <li>Secure payment callbacks</li>
+                </ul>
+                <span class="badge bg-danger">Secure</span>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="uniqueness-card">
+                <div class="icon-large text-secondary">
+                  <i class="bi bi-people"></i>
+                </div>
+                <h4>Dual Dashboard System</h4>
+                <p>Separate interfaces for different users:</p>
+                <ul class="small">
+                  <li><strong>Admin Dashboard:</strong> Manage products, orders, users</li>
+                  <li><strong>User Dashboard:</strong> Track orders, view history</li>
+                  <li>Role-based access control</li>
+                  <li>Real-time statistics</li>
+                </ul>
+                <span class="badge bg-secondary">User-Friendly</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-success mt-4">
+            <h5><i class="bi bi-trophy"></i> Competitive Advantage</h5>
+            <p class="mb-0">ShopHub is the only open-source e-commerce platform that combines local payment integration, modern technology stack, and enterprise features - all optimized for the Kenyan market and available at zero cost.</p>
+          </div>
+        </div>
+
+        <!-- API Overview -->
+        <div id="overview" class="content-section">
+          <h2><i class="bi bi-diagram-3"></i> API Overview</h2>
+          <p>ShopHub provides a comprehensive RESTful API for all platform operations.</p>
+
+          <div class="row g-3">
+            <div class="col-md-4">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="text-primary">REST</h3>
+                  <p class="small mb-0">RESTful architecture</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="text-success">JSON</h3>
+                  <p class="small mb-0">JSON request/response</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card text-center">
+                <div class="card-body">
+                  <h3 class="text-warning">JWT</h3>
+                  <p class="small mb-0">Token-based auth</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h5 class="mt-4">Base URL</h5>
+          <div class="endpoint-card">
+            <code>http://localhost:3000/api</code>
+          </div>
+        </div>
+
+        <!-- Authentication -->
+        <div id="authentication" class="content-section">
+          <h2><i class="bi bi-key"></i> Authentication</h2>
+          
+          <h5 class="mt-4">Register User</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-post">POST</span>
+            <code>/api/auth/register</code>
+          </div>
+          <pre><code class="language-json">{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "password123"
+}</code></pre>
+
+          <h5 class="mt-4">Login</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-post">POST</span>
+            <code>/api/auth/login</code>
+          </div>
+          <pre><code class="language-json">{
+  "email": "john@example.com",
+  "password": "password123"
+}</code></pre>
+
+          <h5 class="mt-4">Response</h5>
+          <pre><code class="language-json">{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "user": {
+    "id": "507f1f77bcf86cd799439011",
+    "name": "John Doe",
+    "email": "john@example.com",
+    "role": "user"
+  }
+}</code></pre>
+
+          <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> Include the token in subsequent requests: <code>Authorization: Bearer {token}</code>
+          </div>
+        </div>
+
+        <!-- Products API -->
+        <div id="products" class="content-section">
+          <h2><i class="bi bi-box-seam"></i> Products API</h2>
+          
+          <h5 class="mt-4">Get All Products</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/products</code>
+          </div>
+
+          <h5 class="mt-4">Get Single Product</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/products/:id</code>
+          </div>
+
+          <h5 class="mt-4">Search Products</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/products/search?q=laptop&category=Electronics</code>
+          </div>
+        </div>
+
+        <!-- Cart API -->
+        <div id="cart" class="content-section">
+          <h2><i class="bi bi-cart"></i> Cart API</h2>
+          
+          <h5 class="mt-4">Get Cart</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/cart</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+
+          <h5 class="mt-4">Add to Cart</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-post">POST</span>
+            <code>/api/cart</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+          <pre><code class="language-json">{
+  "productId": "507f1f77bcf86cd799439011",
+  "quantity": 2
+}</code></pre>
+
+          <h5 class="mt-4">Update Cart Item</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-put">PUT</span>
+            <code>/api/cart/:itemId</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+
+          <h5 class="mt-4">Remove from Cart</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-delete">DELETE</span>
+            <code>/api/cart/:itemId</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+        </div>
+
+        <!-- Orders API -->
+        <div id="orders" class="content-section">
+          <h2><i class="bi bi-receipt"></i> Orders API</h2>
+          
+          <h5 class="mt-4">Create Order</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-post">POST</span>
+            <code>/api/orders</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+          <pre><code class="language-json">{
+  "shippingAddress": {
+    "street": "123 Main St",
+    "city": "Nairobi",
+    "state": "Nairobi",
+    "zipCode": "00100",
+    "country": "Kenya"
+  }
+}</code></pre>
+
+          <h5 class="mt-4">Get User Orders</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/orders</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+
+          <h5 class="mt-4">Get Single Order</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/orders/:id</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+        </div>
+
+        <!-- Payments API -->
+        <div id="payments" class="content-section">
+          <h2><i class="bi bi-credit-card"></i> Payments API</h2>
+          
+          <h5 class="mt-4">PayHero: Initiate Payment</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-post">POST</span>
+            <code>/api/payhero/initiate</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+          <pre><code class="language-json">{
+  "orderId": "507f1f77bcf86cd799439011",
+  "phoneNumber": "0712345678"
+}</code></pre>
+
+          <h5 class="mt-4">Daraja: Initiate Payment</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-post">POST</span>
+            <code>/api/payment/mpesa/initiate</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+
+          <h5 class="mt-4">Check Payment Status</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/payhero/status/:orderId</code>
+            <span class="badge bg-warning text-dark ms-2">Auth Required</span>
+          </div>
+        </div>
+
+        <!-- Admin API -->
+        <div id="admin" class="content-section">
+          <h2><i class="bi bi-shield-lock"></i> Admin API</h2>
+          
+          <div class="alert alert-danger">
+            <i class="bi bi-exclamation-triangle"></i> <strong>Admin Only:</strong> All admin endpoints require admin role.
+          </div>
+
+          <h5 class="mt-4">Get Dashboard Stats</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/admin/stats</code>
+            <span class="badge bg-danger ms-2">Admin Only</span>
+          </div>
+
+          <h5 class="mt-4">Get All Products (Admin)</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/admin/products</code>
+            <span class="badge bg-danger ms-2">Admin Only</span>
+          </div>
+
+          <h5 class="mt-4">Create Product</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-post">POST</span>
+            <code>/api/admin/products</code>
+            <span class="badge bg-danger ms-2">Admin Only</span>
+          </div>
+
+          <h5 class="mt-4">Update Product</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-put">PUT</span>
+            <code>/api/admin/products/:id</code>
+            <span class="badge bg-danger ms-2">Admin Only</span>
+          </div>
+
+          <h5 class="mt-4">Delete Product</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-delete">DELETE</span>
+            <code>/api/admin/products/:id</code>
+            <span class="badge bg-danger ms-2">Admin Only</span>
+          </div>
+
+          <h5 class="mt-4">Get All Orders (Admin)</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-get">GET</span>
+            <code>/api/admin/orders</code>
+            <span class="badge bg-danger ms-2">Admin Only</span>
+          </div>
+
+          <h5 class="mt-4">Update Order Status</h5>
+          <div class="endpoint-card">
+            <span class="method-badge method-put">PUT</span>
+            <code>/api/admin/orders/:id</code>
+            <span class="badge bg-danger ms-2">Admin Only</span>
+          </div>
+          <pre><code class="language-json">{
+  "status": "shipped",
+  "paymentStatus": "completed"
+}</code></pre>
+        </div>
+
+        <!-- Error Codes -->
+        <div class="content-section bg-light">
+          <h3><i class="bi bi-exclamation-octagon"></i> HTTP Status Codes</h3>
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead class="table-dark">
+                <tr>
+                  <th>Code</th>
+                  <th>Meaning</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="badge bg-success">200</span></td>
+                  <td>OK</td>
+                  <td>Request successful</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-success">201</span></td>
+                  <td>Created</td>
+                  <td>Resource created successfully</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-warning text-dark">400</span></td>
+                  <td>Bad Request</td>
+                  <td>Invalid request data</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-warning text-dark">401</span></td>
+                  <td>Unauthorized</td>
+                  <td>Authentication required</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-warning text-dark">403</span></td>
+                  <td>Forbidden</td>
+                  <td>Insufficient permissions</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-warning text-dark">404</span></td>
+                  <td>Not Found</td>
+                  <td>Resource not found</td>
+                </tr>
+                <tr>
+                  <td><span class="badge bg-danger">500</span></td>
+                  <td>Server Error</td>
+                  <td>Internal server error</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+  <script>
+    document.querySelectorAll('.sidebar a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.querySelectorAll('.sidebar a').forEach(a => a.classList.remove('active'));
+          this.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
